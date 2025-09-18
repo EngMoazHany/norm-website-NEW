@@ -1,0 +1,126 @@
+/* الحاوية العامة للفوتر — مثبت تحت */
+.partners-footer {
+  position: fixed;
+  inset-inline: 0;
+  bottom: 0;                 /* تحت خالص */
+  z-index: 30;
+  display: flex;
+  justify-content: center;
+
+  /* الحالة الافتراضية: مخفي */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: opacity .35s ease, transform .35s ease, visibility .35s ease;
+
+  pointer-events: none;      /* علشان ما يمنع الضغط على محتوى الصفحة */
+}
+
+/* لما يكون ظاهر */
+.partners-footer--visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* الشارة الطافية "شركاء النجاح" (نص فقط بدون مربع) */
+.partners-badge {
+  position: absolute;
+  right: 6vw;
+  bottom: 70px;              /* فوق الشريط بشوية */
+  color: #fff;
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 6px rgba(0,0,0,.6), 0 0 12px rgba(255,255,255,.25);
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  padding: 0;
+  pointer-events: auto;      /* يفضل تقدر تحدد النص */
+}
+
+/* لمعة السهم الصغير يمين النص */
+.partners-badge::after {
+  content: "";
+  position: absolute;
+  inset-inline-end: -18px;
+  top: 50%;
+  translate: 0 -50%;
+  width: 18px;
+  height: 14px;
+  background: linear-gradient(135deg, rgba(255,80,40,.85), rgba(120,0,0,.6));
+  clip-path: polygon(0 0,100% 50%,0 100%);
+  filter: drop-shadow(0 0 4px rgba(255,70,40,.5));
+}
+
+/* الشريط الأحمر السفلي — بار زجاجي شبه شفاف بحواف دائرية */
+.partners-strip {
+  pointer-events: auto;      /* تفعيل الهوفر على الأسماء */
+  width: min(1100px, 94vw);  /* مش فول اسكرين علشان الحواف تبان */
+  margin: 0 auto 10px;       /* مسافة صغيرة من تحت */
+  padding: 14px 0;
+  border-radius: 18px;       /* حواف دائرية */
+  background:
+    linear-gradient(180deg, rgba(255,0,0,.22), rgba(120,0,0,.55));
+  border: 1px solid rgba(255,255,255,.12);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.18),
+    0 -6px 20px rgba(0,0,0,.35);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* داخل الشريط: أسماء الشركاء */
+.partners-inner {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+
+.partner {
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  opacity: .95;
+  letter-spacing: .2px;
+  transition: opacity .2s ease, text-shadow .25s ease;
+}
+
+.partner:hover {
+  opacity: 1;
+  text-shadow: 0 0 10px rgba(255,255,255,.35);
+}
+
+/* موبايل */
+@media (max-width: 768px) {
+  .partners-badge {
+    right: 16px;
+    bottom: 66px;
+    font-size: 14px;
+  }
+  .partners-strip {
+    width: 96vw;
+    margin-bottom: 8px;
+    padding: 12px 0;
+    border-radius: 16px;
+  }
+  .partners-inner { gap: 28px; }
+  .partner { font-size: 16px; }
+}
+
+/* للي مفعّل خيار تقليل الحركة */
+@media (prefers-reduced-motion: reduce) {
+  .partners-footer {
+    transition: none !important;
+    transform: none !important;
+  }
+}

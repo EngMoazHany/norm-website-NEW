@@ -1,0 +1,148 @@
+/* الخلفية */
+.Team-section{
+  min-height: 100vh;
+  padding: min(8vw,120px) 4vw;
+  background: url("../assets/BG_Team.png") center/cover no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  overflow: hidden;
+}
+
+.team-wrap{ width: 100%; }
+
+/* العنوان */
+.team-title{
+  font-weight: 900;
+  font-size: clamp(56px, 9vw, 120px);
+  margin: 0 0 36px;
+  text-align: right;
+  text-shadow: 0 0 18px rgba(255,255,255,.15);
+}
+
+/* فيو بورت ثابت + تلاشي على الحواف */
+.team-viewport{
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+/* فواصل تلاشي يمين/يسار لنعومة الدخول والخروج */
+.team-viewport::before,
+.team-viewport::after{
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0;
+  width: min(10vw, 120px);
+  pointer-events: none;
+  z-index: 2;
+}
+.team-viewport::before{
+  left: 0;
+  background: linear-gradient(to right, rgba(0,0,0,0.55), transparent);
+}
+.team-viewport::after{
+  right: 0;
+  background: linear-gradient(to left, rgba(0,0,0,0.55), transparent);
+}
+
+/* التراك المتحرك — نكرّر القائمة مرتين */
+/* التراك المتحرك */
+.team-track{
+  display: flex;
+  gap: 28px;
+  will-change: transform;
+  --marquee-duration: 40s;
+  animation: marquee var(--marquee-duration) linear infinite;
+}
+
+/* لفة لانهائية: نبدأ من 0 → نترجم نص العرض */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+
+/* عند الهوفر وقّف الحركة */
+.team-viewport:hover .team-track{
+  animation-play-state: paused;
+}
+
+/* لفة لانهائية: ترجمة لنصف العرض (عشان مكررين القائمة مرتين) */
+/* اتجاه الحركة: من اليمين لليسار → يختفي شمال ويظهر يمين */
+@keyframes marquee {
+  to { transform: translateX(-50%); }
+}
+
+/* الكارت */
+.team-card{
+  width: 280px;
+  flex: 0 0 280px;
+  border-radius: 22px;
+  overflow: hidden;
+  background: rgba(0,0,0,.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding-bottom: 14px;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.team-card:hover{
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(0,0,0,.55);
+}
+
+/* صورة + أيقونات */
+.img-wrap{
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+}
+.img-wrap img{
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.social-icons{
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.icon-btn{
+  width: 26px; height: 26px;
+  display: grid; place-items: center;
+  color: #fff;
+  background: rgba(0,0,0,.45);
+  border: 1px solid rgba(255,255,255,.25);
+  border-radius: 8px;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  transition: transform .15s ease, background .2s ease, border-color .2s ease;
+}
+.icon-btn:hover{
+  transform: translateY(-1px) scale(1.05);
+  background: rgba(0,0,0,.6);
+  border-color: rgba(255,255,255,.45);
+}
+
+/* الاسم والوظيفة */
+.team-name{
+  margin: 12px 12px 4px;
+  font-size: 20px;
+  font-weight: 800;
+}
+.team-role{
+  margin: 0 12px;
+  font-size: 15px;
+  opacity: .85;
+}
+
+/* استجابة */
+@media (max-width: 600px){
+  .team-card{ width: 240px; flex-basis: 240px; }
+  .team-title{ font-size: clamp(48px, 10vw, 88px); }
+}

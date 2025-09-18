@@ -1,0 +1,47 @@
+/* ===== About (من نحن) ===== */
+.about-section{
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  justify-content: flex-start;          /* البلوك يروح للشمال */
+  align-items: center;
+  padding-inline: min(10vw, 120px);     /* مسافة من الشمال */
+  overflow: hidden;
+
+  /* صورة الخلفية فقط */
+  background: url("../assets/BG_about.png") center / cover no-repeat;
+}
+
+.about-content{
+  position: relative;
+  z-index: 1;                 
+  max-width: 680px;
+  direction: rtl;             
+  text-align: right;
+  color: #ddd;
+}
+
+.about-title{
+  font-weight: 900;
+  font-size: 120px;
+  line-height: .95;
+  margin: 0 0 24px;
+  color: #fff;
+  text-shadow: 0 0 18px rgba(0,0,0,.4); /* تباين فوق الصورة */
+}
+
+.about-content p{
+  font-size: 20px;
+  line-height: 1.9;
+  margin: 10px 0;
+  text-shadow: 0 0 8px rgba(0,0,0,.5); /* يوضح النص */
+}
+
+/* Responsiveness */
+@media (max-width: 1200px){ .about-title{ font-size: 110px; } }
+@media (max-width: 992px){ .about-title{ font-size: 100px; } }
+@media (max-width: 768px){
+  .about-title{ font-size: 88px; }
+  .about-content{ max-width: 90vw; }
+}
+@media (max-width: 520px){ .about-title{ font-size: 72px; } }

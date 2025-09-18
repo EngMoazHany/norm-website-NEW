@@ -1,0 +1,126 @@
+/* ===== Container ===== */
+.home-page{
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ===== Base section (shared) ===== */
+.hero,
+.insomnia-section{
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 24px;
+  position: relative;
+  text-align: center;
+  overflow: hidden;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* تظليل خفيف */
+.hero::before,
+.insomnia-section::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(1200px 600px at 80% 0%, rgba(0,0,0,.15), transparent 60%),
+    linear-gradient(160deg, rgba(0,0,0,.25) 30%, rgba(0,0,0,0) 70%);
+}
+
+/* ===== SECTION 1: معيار الحكاية ===== */
+.hero{
+  background-image: url("../assets/BG_story.png");
+}
+
+/* ===== SECTION 2: لا ننام ===== */
+.insomnia-section{
+  background-image: url("../assets/BG_insomnia.png");
+}
+
+/* ===== العنوان + النص الصغير جنب بعض ===== */
+.hero-heading{
+  width: max-content;
+  margin-inline: auto;
+  position: relative;
+  z-index: 1;
+}
+.hero-heading--inline{
+  display: flex;
+  align-items: center;   /* ثبّت النصوص */
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: nowrap;
+}
+
+/* ===== العنوان ===== */
+.hero-title{
+  font-family: "Montserrat Arabic", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  font-weight: 900;
+  font-size: 120px;
+  line-height: .95;
+  margin: 0;
+  color: #fff;
+  text-shadow:
+    0 0 6px rgba(0,0,0,.8),
+    0 0 18px rgba(0,0,0,.6);
+  position: relative;
+  z-index: 1;
+  transform: translateZ(0); /* يثبّت العنوان */
+}
+
+/* ===== السطر المتغير ===== */
+.hero-subtitle-inline{
+  font-family: "Montserrat Arabic", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+  text-shadow:
+    0 0 6px rgba(0,0,0,.8),
+    0 0 14px rgba(0,0,0,.6);
+  position: relative;
+  z-index: 1;
+  display: inline-block;     /* عشان GSAP يحرّكه بس */
+  will-change: transform;
+  white-space: nowrap;
+}
+
+/* الغي أنيميشن الهيرو (هيتعمل بالـGSAP) */
+.hero .hero-subtitle-inline{
+  animation: none;
+}
+
+/* خلي الانيميشن يفضل شغال في السكشن التاني */
+.insomnia-section .hero-subtitle-inline{
+  animation: subFloatY 3s ease-in-out infinite;
+}
+
+/* طلوع/نزول خفيف للسكشن التاني */
+@keyframes subFloatY{
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 1200px){
+  .hero-title{ font-size: 110px; }
+}
+@media (max-width: 992px){
+  .hero-title{ font-size: 100px; }
+  .hero-subtitle-inline{ font-size: 22px; }
+}
+@media (max-width: 768px){
+  .hero-heading--inline{ gap: 10px; }
+  .hero-title{ font-size: 88px; }
+  .hero-subtitle-inline{ font-size: 20px; }
+}
+@media (max-width: 520px){
+  .hero-heading--inline{ flex-wrap: wrap; }
+  .hero-title{ font-size: 72px; }
+  .hero-subtitle-inline{ font-size: 18px; }
+}

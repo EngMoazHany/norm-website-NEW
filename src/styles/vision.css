@@ -1,0 +1,56 @@
+/* ===== Vision (رؤيتنا) ===== */
+.vision-section{
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  justify-content: flex-start;          /* نفس About */
+  align-items: center;
+  padding-inline: min(10vw, 120px);     /* نفس About */
+  overflow: hidden;
+
+  /* صورة الخلفية */
+  background: url("../assets/BG_vision.png") center / cover no-repeat;
+}
+
+.vision-content{
+  position: relative;
+  z-index: 1;                 
+  max-width: 680px;
+  direction: rtl;             
+  text-align: right;
+  color: #ddd;
+}
+
+.vision-title{
+  font-weight: 900;
+  font-size: 120px;
+  line-height: .95;
+  margin: 0 0 24px;
+  color: #fff;
+  text-shadow: 0 0 18px rgba(0,0,0,.4);
+}
+
+.vision-content p{
+  font-size: 20px;
+  line-height: 1.9;
+  margin: 10px 0;
+  text-shadow: 0 0 8px rgba(0,0,0,.5);
+}
+
+/* ===== Responsiveness ===== */
+@media (max-width: 1200px){ 
+  .vision-title{ font-size: 110px; } 
+}
+
+@media (max-width: 992px){ 
+  .vision-title{ font-size: 100px; } 
+}
+
+@media (max-width: 768px){
+  .vision-title{ font-size: 88px; }
+  .vision-content{ max-width: 90vw; }
+}
+
+@media (max-width: 520px){ 
+  .vision-title{ font-size: 72px; } 
+}
