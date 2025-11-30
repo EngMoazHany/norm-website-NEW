@@ -1,9 +1,7 @@
 import { useState } from "react";
-
 import Navbar from "./components/Navbar.jsx";
 import SplashVideo from "./components/SplashVideo.jsx";
 import Footer from "./components/Footer.jsx";
-
 import Home from "./pages/Home.jsx";
 import About from "./pages/About.jsx";
 import Vision from "./pages/Vision.jsx";
@@ -17,7 +15,6 @@ export default function App() {
   return (
     <>
       <Navbar />
-
       <main>
         <section id="home"><Home /></section>
         <section id="about"><About /></section>
@@ -25,12 +22,9 @@ export default function App() {
         <section id="services"><Services /></section>
         <section id="team"><Team /></section>
         <section id="contact"><Contact /></section>
-      
       </main>
-
-      {splashVisible && (
-        <SplashVideo onDone={() => setSplashVisible(false)} />
-      )}
+      {splashVisible && <SplashVideo onDone={() => setSplashVisible(false)} />}
+      {/* ملاحظة: Footer الشركاء بيظهر داخل سكشن الهيرو كـ component منفصل */}
     </>
   );
 }

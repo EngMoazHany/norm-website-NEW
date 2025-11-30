@@ -1,32 +1,21 @@
 import { useEffect, useRef } from "react";
 import "../styles/splash.css";
 
-
 export default function SplashVideo({ onDone }) {
   const videoRef = useRef(null);
 
   useEffect(() => {
-    // قفل السكرول مؤقتًا
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-
-    // جرّب تشغيل الفيديو يدويًا (علاج سياسات autoplay)
     const v = videoRef.current;
     const tryPlay = v?.play?.();
     if (tryPlay?.catch) {
-      tryPlay.catch(() => {
-        v?.setAttribute("controls", "true"); // اسمح بتشغيل يدوي لو اتمنع
-      });
+      tryPlay.catch(() => v?.setAttribute("controls", "true"));
     }
-
-    return () => {
-      document.body.style.overflow = prev;
-    };
+    return () => { document.body.style.overflow = prev; };
   }, []);
 
-  const finish = () => {
-    onDone?.();
-  };
+  const finish = () => onDone?.();
 
   return (
     <div className="splash">
@@ -38,7 +27,7 @@ export default function SplashVideo({ onDone }) {
         playsInline
         onEnded={finish}
         onError={finish}
-        style={{ width: "100%", height: "100%", objectFit: "cover", background:"#000" }}
+        style={{ width: "100%", height: "100%", objectFit: "cover", background: "#000" }}
       />
       <button className="skip" onClick={finish}>تخطي ▶</button>
     </div>

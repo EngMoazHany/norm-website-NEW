@@ -9,7 +9,6 @@
   color: #fff;
   overflow: hidden;
 }
-
 .team-wrap{ width: 100%; }
 
 /* العنوان */
@@ -21,14 +20,12 @@
   text-shadow: 0 0 18px rgba(255,255,255,.15);
 }
 
-/* فيو بورت ثابت + تلاشي على الحواف */
+/* الفيو بورت + تلاشي الحواف */
 .team-viewport{
   width: 100%;
   overflow: hidden;
   position: relative;
 }
-
-/* فواصل تلاشي يمين/يسار لنعومة الدخول والخروج */
 .team-viewport::before,
 .team-viewport::after{
   content: "";
@@ -47,32 +44,26 @@
   background: linear-gradient(to left, rgba(0,0,0,0.55), transparent);
 }
 
-/* التراك المتحرك — نكرّر القائمة مرتين */
-/* التراك المتحرك */
+/* التراك (مكرر مرتين) */
 .team-track{
   display: flex;
   gap: 28px;
+  width: max-content;
   will-change: transform;
-  --marquee-duration: 40s;
-  animation: marquee var(--marquee-duration) linear infinite;
+  --marquee-duration: 45s; /* غيّرها حسب السرعة */
+  --half: 50%;             /* تتحدّث من الجافاسكريبت للبيكسل */
+  animation: marqueeFromRight var(--marquee-duration) linear infinite;
 }
 
-/* لفة لانهائية: نبدأ من 0 → نترجم نص العرض */
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+/* من يمين خارج الشاشة ( +half ) إلى يسار داخل الشاشة ( -half ) */
+@keyframes marqueeFromRight {
+  from { transform: translateX(var(--half)); }
+  to   { transform: translateX(calc(-1 * var(--half))); }
 }
 
-
-/* عند الهوفر وقّف الحركة */
+/* إيقاف عند الهوفر */
 .team-viewport:hover .team-track{
   animation-play-state: paused;
-}
-
-/* لفة لانهائية: ترجمة لنصف العرض (عشان مكررين القائمة مرتين) */
-/* اتجاه الحركة: من اليمين لليسار → يختفي شمال ويظهر يمين */
-@keyframes marquee {
-  to { transform: translateX(-50%); }
 }
 
 /* الكارت */
@@ -93,52 +84,29 @@
 }
 
 /* صورة + أيقونات */
-.img-wrap{
-  position: relative;
-  border-radius: 18px;
-  overflow: hidden;
-}
-.img-wrap img{
-  width: 100%;
-  height: auto;
-  display: block;
-}
+.img-wrap{ position: relative; border-radius: 18px; overflow: hidden; }
+.img-wrap img{ width: 100%; height: auto; display: block; }
 
 .social-icons{
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
+  position: absolute; top: 10px; left: 10px;
+  display: flex; flex-direction: column; gap: 6px;
 }
 .icon-btn{
-  width: 26px; height: 26px;
-  display: grid; place-items: center;
-  color: #fff;
-  background: rgba(0,0,0,.45);
-  border: 1px solid rgba(255,255,255,.25);
-  border-radius: 8px;
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  width: 26px; height: 26px; display: grid; place-items: center;
+  color: #fff; background: rgba(0,0,0,.45);
+  border: 1px solid rgba(255,255,255,.25); border-radius: 8px;
+  backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
   transition: transform .15s ease, background .2s ease, border-color .2s ease;
 }
-.icon-btn:hover{
-  transform: translateY(-1px) scale(1.05);
-  background: rgba(0,0,0,.6);
-  border-color: rgba(255,255,255,.45);
-}
+.icon-btn:hover{ transform: translateY(-1px) scale(1.05); background: rgba(0,0,0,.6); border-color: rgba(255,255,255,.45); }
 
 /* الاسم والوظيفة */
-.team-name{
-  margin: 12px 12px 4px;
-  font-size: 20px;
-  font-weight: 800;
-}
-.team-role{
-  margin: 0 12px;
-  font-size: 15px;
-  opacity: .85;
+.team-name{ margin: 12px 12px 4px; font-size: 20px; font-weight: 800; }
+.team-role{ margin: 0 12px; font-size: 15px; opacity: .85; }
+
+/* تقليل الحركة */
+@media (prefers-reduced-motion: reduce){
+  .team-track{ animation: none; transform: none; }
 }
 
 /* استجابة */

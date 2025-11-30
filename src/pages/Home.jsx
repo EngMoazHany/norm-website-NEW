@@ -10,7 +10,7 @@ gsap.registerPlugin(ScrollTrigger);
 export default function Home() {
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    gsap.defaults({ ease: "power3.out", duration: 1 });
+    gsap.defaults({ ease: "power3.out", duration: 0.9 });
 
     const sections = [
       { wrap: ".hero", title: ".hero .hero-title", sub: ".hero .hero-subtitle-inline" },
@@ -18,11 +18,14 @@ export default function Home() {
     ];
 
     sections.forEach(({ wrap, title, sub }) => {
-      gsap.timeline({
+      const tl = gsap.timeline({
         scrollTrigger: { trigger: wrap, start: "top 85%", once: true }
-      })
-      .from(title, { y: 40, opacity: 0, immediateRender: false })
-      .from(sub,   { y: 20, opacity: 0, immediateRender: false }, "-=0.35");
+      });
+      tl.from(title, { y: 40, opacity: 0, immediateRender: false })
+        .from(sub,   { y: 20, opacity: 0, immediateRender: false }, "-=0.35")
+        .add(() => {
+          gsap.set([title, sub], { clearProps: "transform,opacity" });
+        });
     });
 
     if (!reduce) {
@@ -40,7 +43,7 @@ export default function Home() {
       });
     }
 
-    // ===== تبديل العبارات في الهيرو بحركة طلوع/نزول ناعمة =====
+    // تبديل العبارات
     const heroSub = document.querySelector(".hero .hero-subtitle-inline");
     let tlSwap;
     if (heroSub && !reduce) {
@@ -50,12 +53,11 @@ export default function Home() {
         "نحن  تجد لكل حكاية معيارها",
       ];
       let i = 0;
-
       gsap.set(heroSub, { clearProps: "all" });
 
       tlSwap = gsap.to(heroSub, {
         y: -12,
-        duration: 1.6,
+        duration: 1.4,
         ease: "power1.inOut",
         yoyo: true,
         repeat: -1,
@@ -67,7 +69,7 @@ export default function Home() {
     }
 
     return () => {
-      ScrollTrigger.getAll().forEach(s => s.kill());
+      ScrollTrigger.getAll().forEach((s) => s.kill());
       if (tlSwap) tlSwap.kill();
     };
   }, []);

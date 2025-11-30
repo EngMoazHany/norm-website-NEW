@@ -6,42 +6,46 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function Vision(){
   useEffect(() => {
-    gsap.defaults({ ease: "power3.out", duration: 1 });
+    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const low = window.__LOW_END || reduce;
 
-    // ظهور العنوان والنصوص
-    const tl = gsap.timeline({
-      scrollTrigger: { trigger: ".vision-content", start: "top 80%" }
-    });
-    tl.from(".vision-title", { y: 40, opacity: 0, immediateRender: false })
-      .from(".vision-content p", { y: 20, opacity: 0, stagger: 0.15, immediateRender: false }, "-=0.3");
+    gsap.defaults({ ease: "power2.out", duration: low ? 0.45 : 0.9 });
 
-    // Parallax خفيف للدائرة والخطوط
-    gsap.to(".vision-sun", {
-      y: -70, ease: "none",
-      scrollTrigger: { trigger: ".vision-section", start: "top bottom", end: "bottom top", scrub: 1.2 }
-    });
-    gsap.to(".v-vert", {
-      y: -50, ease: "none",
-      scrollTrigger: { trigger: ".vision-section", start: "top bottom", end: "bottom top", scrub: 1.2 }
-    });
-    gsap.to(".v-horz", {
-      x: -50, ease: "none",
-      scrollTrigger: { trigger: ".vision-section", start: "top bottom", end: "bottom top", scrub: 1.2 }
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({
+        scrollTrigger: { trigger: ".vision-content", start: "top 85%", once: low }
+      });
+      tl.from(".vision-title", { y: 28, opacity: 0, immediateRender: false })
+        .from(".vision-content p", { y: 12, opacity: 0, stagger: 0.1, immediateRender: false }, "-=0.25")
+        .add(() => gsap.set([".vision-title", ".vision-content p"], { clearProps: "transform,opacity" }));
+
+      if (!low && window.innerWidth >= 900) {
+        gsap.set([".vision-sun", ".v-vert", ".v-horz"], { willChange: "transform" });
+        gsap.to(".vision-sun", {
+          y: -70, ease: "none",
+          scrollTrigger: { trigger: ".vision-section", start: "top bottom", end: "bottom top", scrub: 0.8 }
+        });
+        gsap.to(".v-vert", {
+          y: -50, ease: "none",
+          scrollTrigger: { trigger: ".vision-section", start: "top bottom", end: "bottom top", scrub: 0.8 }
+        });
+        gsap.to(".v-horz", {
+          x: -50, ease: "none",
+          scrollTrigger: { trigger: ".vision-section", start: "top bottom", end: "bottom top", scrub: 0.8 }
+        });
+      }
     });
 
-    return () => ScrollTrigger.getAll().forEach(s => s.kill());
+    return () => ctx.revert();
   }, []);
 
   return (
     <section id="vision" className="vision-section">
-      {/* الديكور يمين كخلفية */}
       <div className="vision-deco" aria-hidden="true">
         <div className="vision-sun"></div>
         <span className="v-line v-vert" />
         <span className="v-line v-horz" />
       </div>
-
-      {/* المحتوى يمين – ثابت ومافيش تداخل */}
       <div className="vision-content" dir="rtl">
         <h1 className="vision-title">رؤيتـنــــا</h1>
         <p>أن نكون مرجعًا مهنيًا في الإنتاج الإعلامي والفكري، يجمع بين الإبداع والجودة والانضباط.</p>

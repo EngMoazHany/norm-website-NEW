@@ -72,3 +72,12 @@ button{ font-family: inherit; }
     radial-gradient(1200px 600px at 80% 0%, rgba(225,29,29,.30), transparent 60%),
     linear-gradient(160deg, #170000 30%, #0d0d0f 70%);
 }
+/* Lenis integration */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto; }
+.lenis.lenis-stopped { overflow: hidden; }
+.lenis.lenis-scrolling iframe { pointer-events: none; }
+
+/* Micro-optimizations */
+img, video { max-width: 100%; height: auto; }
+.will-change { will-change: transform, opacity; }

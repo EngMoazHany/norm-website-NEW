@@ -45,3 +45,6 @@
   .about-content{ max-width: 90vw; }
 }
 @media (max-width: 520px){ .about-title{ font-size: 72px; } }
+/* نص أصغر قليلاً على الأجهزة الضعيفة لتقليل تكلفة التظليل */
+.reduced-effects .about-title,
+.reduced-effects .vision-title { font-size: clamp(48px, 10vw, 88px) !important; }
