@@ -93,25 +93,33 @@
 
 /* ===== Responsive (Mobile) ===== */
 @media (max-width: 768px) {
-  .partners-badge {
-    right: 12px;
-    bottom: 62px;
-    font-size: 14px;
-  }
+
   .partners-strip {
     width: 92vw;
     margin-bottom: 6px;
     padding: 10px 0;
     border-radius: 14px;
+    overflow-x: auto;               /* 🔥 Scroll أفقي */
+    -webkit-overflow-scrolling: touch;
   }
+
   .partners-inner {
-    gap: 20px;
-    flex-wrap: wrap;
+    display: flex;
+    flex-wrap: nowrap;              /* 🔥 سطر واحد فقط */
+    gap: 26px;                      /* مسافة أصغر */
+    padding: 0 12px;
   }
+
+  .partners-inner::-webkit-scrollbar {
+    display: none;                  /* إخفاء الـ scrollbar */
+  }
+
   .partner {
     font-size: 15px;
+    white-space: nowrap;            /* 🔥 عدم تقطيع النص */
   }
 }
+
 
 /* Reduce motion */
 @media (prefers-reduced-motion: reduce) {
