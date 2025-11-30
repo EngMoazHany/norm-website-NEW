@@ -208,3 +208,48 @@
 @media (prefers-reduced-motion: reduce){
   .submit-btn, .sicon, .field input{ transition: none; }
 }
+
+/* Mobile (≤900px): تكديس Hero فوق Form + CENTER CONTENT */
+@media (max-width: 900px){
+
+  .contact-panel{
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "hero"
+      "form";
+    width: min(760px, 94vw);
+    padding: clamp(24px, 4.5vw, 36px);
+    gap: clamp(16px, 3vw, 22px);
+  }
+
+  /* ----------- Center the HERO content ----------- */
+  .contact-hero{
+    text-align: center !important;
+    justify-items: center;
+    align-content: start;
+  }
+
+  /* Center the title */
+  .contact-title{
+    text-align: center !important;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Center "تواصــل معنــا" */
+  .social-label{
+    text-align: center !important;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Center social icons row */
+  .contact-social{
+    justify-items: center !important;
+    align-items: center !important;
+  }
+
+  .icons{
+    justify-content: center !important;
+  }
+}

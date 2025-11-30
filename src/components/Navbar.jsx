@@ -27,7 +27,6 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
-  // detect resize
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth <= 768);
     window.addEventListener("resize", handleResize);
@@ -37,27 +36,21 @@ export default function Navbar() {
   return (
     <header style={styles.navbar}>
       <div style={styles.navdiv} dir="rtl">
-        {/* Logo */}
-        <div style={styles.logo}>
-          <a
-            href="#home"
-            onClick={(e) => {
-              e.preventDefault();
-              scrollToId("home");
-            }}
-          >
-            <img src="/logo.png" alt="NORM" style={styles.logoImage} />
-          </a>
-        </div>
 
-        {/* Mobile Menu Button */}
-        {isMobile && (
-          <button
-            style={styles.menuToggle}
-            onClick={() => setIsOpen((p) => !p)}
-          >
-            ☰
-          </button>
+        {/* CTA (ينقل لليمين) */}
+        {!isMobile && (
+          <div style={styles.contactLink}>
+            <a
+              href="#contact"
+              style={styles.navLink}
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToId("contact");
+              }}
+            >
+              تواصل معنا
+            </a>
+          </div>
         )}
 
         {/* Navigation */}
@@ -82,7 +75,6 @@ export default function Navbar() {
             </a>
           ))}
 
-          {/* CTA inside menu on mobile */}
           {isMobile && (
             <a
               href="#contact"
@@ -98,21 +90,29 @@ export default function Navbar() {
           )}
         </nav>
 
-        {/* CTA (PC only) */}
-        {!isMobile && (
-          <div style={styles.contactLink}>
-            <a
-              href="#contact"
-              style={styles.navLink}
-              onClick={(e) => {
-                e.preventDefault();
-                scrollToId("contact");
-              }}
-            >
-              تواصل معنا
-            </a>
-          </div>
+        {/* Mobile Menu Button */}
+        {isMobile && (
+          <button
+            style={styles.menuToggle}
+            onClick={() => setIsOpen((p) => !p)}
+          >
+            ☰
+          </button>
         )}
+
+        {/* Logo moved LEFT */}
+        <div style={styles.logo}>
+          <a
+            href="#home"
+            onClick={(e) => {
+              e.preventDefault();
+              scrollToId("home");
+            }}
+          >
+            <img src="/logo.png" alt="NORM" style={styles.logoImage} />
+          </a>
+        </div>
+
       </div>
     </header>
   );
@@ -126,7 +126,7 @@ const styles = {
     right: 0,
     margin: "1px auto",
     padding: "15px 30px",
-    backgroundColor: "rgba(0, 0, 0, 0.4)",
+    backgroundColor: "rgba(0,0,0,0.4)",
     backdropFilter: "blur(10px)",
     borderRadius: "12px",
     zIndex: 1000,
@@ -149,7 +149,6 @@ const styles = {
     height: "auto",
   },
 
-  // === PC Menu ===
   navLinks: {
     display: "flex",
     gap: "30px",
@@ -161,14 +160,12 @@ const styles = {
     fontSize: "18px",
     fontWeight: 700,
     textDecoration: "none",
-    cursor: "pointer",
   },
 
   contactLink: {
     fontWeight: 700,
   },
 
-  // === Mobile Menu Button ===
   menuToggle: {
     background: "none",
     border: "none",
@@ -177,12 +174,11 @@ const styles = {
     cursor: "pointer",
   },
 
-  // === Mobile Menu ===
   mobileMenu: {
     position: "absolute",
     top: "70px",
-    right: "0",
-    backgroundColor: "rgba(0,0,0,0.8)",
+    right: 0,
+    backgroundColor: "rgba(0,0,0,0.85)",
     width: "100%",
     padding: "20px",
     flexDirection: "column",
@@ -198,7 +194,6 @@ const styles = {
   mobileLink: {
     color: "#fff",
     fontSize: "20px",
-    textDecoration: "none",
     fontWeight: 700,
     padding: "10px 0",
     borderBottom: "1px solid rgba(255,255,255,0.2)",
