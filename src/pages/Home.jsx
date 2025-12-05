@@ -9,20 +9,30 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
   useEffect(() => {
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduce = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
     gsap.defaults({ ease: "power3.out", duration: 0.9 });
 
     const sections = [
-      { wrap: ".hero", title: ".hero .hero-title", sub: ".hero .hero-subtitle-inline" },
-      { wrap: ".insomnia-section", title: ".insomnia-section .hero-title", sub: ".insomnia-section .hero-subtitle-inline" },
+      {
+        wrap: ".hero",
+        title: ".hero .hero-title",
+        sub: ".hero .hero-subtitle-inline",
+      },
+      {
+        wrap: ".insomnia-section",
+        title: ".insomnia-section .hero-title",
+        sub: ".insomnia-section .hero-subtitle-inline",
+      },
     ];
 
     sections.forEach(({ wrap, title, sub }) => {
       const tl = gsap.timeline({
-        scrollTrigger: { trigger: wrap, start: "top 85%", once: true }
+        scrollTrigger: { trigger: wrap, start: "top 85%", once: true },
       });
       tl.from(title, { y: 40, opacity: 0, immediateRender: false })
-        .from(sub,   { y: 20, opacity: 0, immediateRender: false }, "-=0.35")
+        .from(sub, { y: 20, opacity: 0, immediateRender: false }, "-=0.35")
         .add(() => {
           gsap.set([title, sub], { clearProps: "transform,opacity" });
         });
@@ -81,7 +91,9 @@ export default function Home() {
         <div className="section-bg bg-story" aria-hidden="true" />
         <div className="hero-heading hero-heading--inline">
           <h1 className="hero-title">معيـــار الحكايـــة</h1>
-          <span className="hero-subtitle-inline">حيث تجد لكل حكاية معيارها</span>
+          <span className="hero-subtitle-inline">
+            حيث تجد لكل حكاية معيارها
+          </span>
           <Footer />
         </div>
       </section>
@@ -93,6 +105,8 @@ export default function Home() {
           <h1 className="hero-title">لا ننــام</h1>
           <span className="hero-subtitle-inline">مختلفون</span>
         </div>
+          <div class="stars"></div>
+          <div class="overlay-bottom"></div>
       </section>
     </main>
   );

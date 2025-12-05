@@ -1,50 +1,88 @@
 /* ===== About (من نحن) ===== */
-.about-section{
+.about-section {
   position: relative;
   min-height: 100vh;
   display: flex;
-  justify-content: flex-start;          /* البلوك يروح للشمال */
+  justify-content: flex-start; /* البلوك يروح للشمال */
   align-items: center;
-  padding-inline: min(10vw, 120px);     /* مسافة من الشمال */
+  padding-inline: min(10vw, 120px); /* مسافة من الشمال */
   overflow: hidden;
 
   /* صورة الخلفية فقط */
-  background: url("../assets/BG_about.png") center / cover no-repeat;
+  /* background: url("../assets/BG_about.png") center / cover no-repeat; */
+  background: black;
+  background: linear-gradient(
+    146deg,
+    rgba(0, 0, 0, 1) 5%,
+    rgba(91, 7, 2, 1) 27%,
+    rgba(0, 0, 0, 1) 66%,
+    rgba(143, 1, 0, 1) 86%
+  );
+  background-size: 200% 200%; /* لتوسيع المساحة للتحريك */
+  animation: gradientShift 18s ease infinite;
 }
-
-.about-content{
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+.about-content {
   position: relative;
-  z-index: 1;                 
+  z-index: 1;
   max-width: 680px;
-  direction: rtl;             
+  direction: rtl;
   text-align: right;
   color: #ddd;
 }
 
-.about-title{
+.about-title {
   font-weight: 900;
   font-size: 120px;
-  line-height: .95;
+  line-height: 0.95;
   margin: 0 0 24px;
   color: #fff;
-  text-shadow: 0 0 18px rgba(0,0,0,.4); /* تباين فوق الصورة */
+  text-shadow: 0 0 18px rgba(0, 0, 0, 0.4); /* تباين فوق الصورة */
 }
 
-.about-content p{
+.about-content p {
   font-size: 20px;
   line-height: 1.9;
   margin: 10px 0;
-  text-shadow: 0 0 8px rgba(0,0,0,.5); /* يوضح النص */
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.5); /* يوضح النص */
 }
 
 /* Responsiveness */
-@media (max-width: 1200px){ .about-title{ font-size: 110px; } }
-@media (max-width: 992px){ .about-title{ font-size: 100px; } }
-@media (max-width: 768px){
-  .about-title{ font-size: 88px; }
-  .about-content{ max-width: 90vw; }
+@media (max-width: 1200px) {
+  .about-title {
+    font-size: 110px;
+  }
 }
-@media (max-width: 520px){ .about-title{ font-size: 72px; } }
+@media (max-width: 992px) {
+  .about-title {
+    font-size: 100px;
+  }
+}
+@media (max-width: 768px) {
+  .about-title {
+    font-size: 88px;
+  }
+  .about-content {
+    max-width: 90vw;
+  }
+}
+@media (max-width: 520px) {
+  .about-title {
+    font-size: 72px;
+  }
+}
 /* نص أصغر قليلاً على الأجهزة الضعيفة لتقليل تكلفة التظليل */
 .reduced-effects .about-title,
-.reduced-effects .vision-title { font-size: clamp(48px, 10vw, 88px) !important; }
+.reduced-effects .vision-title {
+  font-size: clamp(48px, 10vw, 88px) !important;
+}
